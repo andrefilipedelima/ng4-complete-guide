@@ -9,7 +9,7 @@ export class RecipeService {
 
     recipesChanged = new Subject<Recipe[]>
 
-    private recipes: Recipe[] = [
+    /* private recipes: Recipe[] = [
         new Recipe(
             'A Lasagna', 
             'Lasagna is both a type of pasta made up of wide ribbons, and also a dish, sometimes called oven lasagna, made with these ribbons placed in layers, and interspersed with stuffing and sauce.', 
@@ -30,9 +30,16 @@ export class RecipeService {
                 new Ingredient('Milk', 1),
                 new Ingredient('flour', 5)
             ])
-      ];
+    ]; */
+
+    private recipes: Recipe[] = [];
 
       constructor(private shoppingListService: ShoppingListService) {}
+
+      setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+      }
 
       getRecipes() {
         return this.recipes.slice();
